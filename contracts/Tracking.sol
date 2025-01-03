@@ -74,7 +74,7 @@ contract Tracking {
             distance: _distance,
             price: _price,
             status: ShipmentStatus.PENDING,
-            isPaid: true // Mark as paid upon successful payment
+            isPaid: false
         });
 
         shipments[msg.sender].push(newShipment);
@@ -166,6 +166,7 @@ contract Tracking {
             amount
         );
     }
+
     function getShipment(
         address _sender,
         uint256 _index
@@ -190,5 +191,21 @@ contract Tracking {
             shipment.status,
             shipment.isPaid
         );
+    }
+    function getShipmentcount(
+        address _sender
+    ) public view returns(
+        uint256
+    )
+    {
+        return shipments[_sender].length; 
+    }
+    function getAllTransactions()
+    public view 
+    returns (
+        TypeShipment[] memory
+    )
+    {
+        return typeShipment;
     }
 }
